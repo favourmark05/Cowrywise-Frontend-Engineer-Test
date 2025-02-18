@@ -55,9 +55,15 @@ onMounted(() => {
 <template>
   <div class="app">
     <div class="backdrop">
-      <SearchBar v-if="!showSearchResults" @search="handleSearch" class="search" />
+      <SearchBar
+        v-if="!showSearchResults"
+        @search="handleSearch"
+        class="search"
+      />
       <div v-if="showSearchResults" class="search-result-container">
-        <p class="search-result">Searching for <span>"{{ searchTerm }}"</span></p>
+        <p class="search-result">
+          Searching for <span>“{{ searchTerm }}”</span>
+        </p>
         <p class="back-btn" @click="goBack">X</p>
       </div>
     </div>
@@ -127,9 +133,14 @@ onMounted(() => {
     max-width: 65%;
     align-items: center;
     font-size: 50px;
-    color: black;
+    color: #0a3e73;
     padding: 80px 35px;
   }
+  .search-result span {
+    color: #6b7280;
+    font-weight: normal;
+  }
+
   .search-result-container {
     display: grid;
     grid-template-columns: auto auto;
@@ -138,7 +149,7 @@ onMounted(() => {
     margin-top: 60px;
     padding: 10px 20px;
     height: 50px;
-    width: 125px ;
+    width: 125px;
     color: red;
     font-weight: bold;
     cursor: pointer;

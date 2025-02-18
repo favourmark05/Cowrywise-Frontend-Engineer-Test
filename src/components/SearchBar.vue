@@ -11,11 +11,18 @@ const searchQuery = ref("");
 
 const debouncedSearch = useDebounceFn((query: string) => {
   emit("search", query);
-}, 500);
+}, 5000);
 
 const handleInput = () => {
   debouncedSearch(searchQuery.value);
 };
+
+const handleKeyDown = (event: KeyboardEvent) => {
+  if (event.key === "Enter") {
+    emit("search", searchQuery.value);
+  }
+};
+
 </script>
 
 <template>
@@ -26,6 +33,7 @@ const handleInput = () => {
         type="text"
         v-model="searchQuery"
         @input="handleInput"
+        @keydown.enter="handleKeyDown"
         placeholder="Search for photos"
         class="search-input"
       />
