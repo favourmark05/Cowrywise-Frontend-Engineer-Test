@@ -11,6 +11,7 @@ const loading = ref(true);
 const selectedPhoto = ref<Photo | null>(null);
 const error = ref<string | null>(null);
 const searchTerm = ref<string | null>(null);
+const showSearchResults = ref(false); // Track visibility state
 
 const fetchPhotos = async (query: string = "") => {
   loading.value = true;
@@ -28,7 +29,14 @@ const fetchPhotos = async (query: string = "") => {
 
 const handleSearch = (query: string) => {
   searchTerm.value = query;
+  showSearchResults.value = true; // Hide search bar and show results
   fetchPhotos(query);
+};
+
+const goBack = () => {
+  searchTerm.value = null; // Clear search term
+  showSearchResults.value = false; // Hide results and show search bar
+  fetchPhotos(); // Load default photos
 };
 
 const openModal = (photo: Photo) => {
@@ -47,10 +55,10 @@ onMounted(() => {
 <template>
   <div class="app">
     <div class="backdrop">
-      <SearchBar @search="handleSearch" class="search" />
-      <div class="search-result-container">
+      <SearchBar v-if="!showSearchResults" @search="handleSearch" class="search" />
+      <div v-if="showSearchResults" class="search-result-container">
         <p class="search-result">Searching for <span>"{{ searchTerm }}"</span></p>
-        <button class="back-btn">Go Back</button>
+        <button class="back-btn" @click="goBack">Go Back</button>
       </div>
     </div>
 
@@ -88,6 +96,7 @@ onMounted(() => {
     </Transition>
   </div>
 </template>
+
 
 <style lang="scss">
 :root {
