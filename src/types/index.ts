@@ -9,6 +9,7 @@ export interface Photo {
     alt_description: string;
     user: {
       name: string;
+      location: string;
     };
     location: {
       title: string | null;

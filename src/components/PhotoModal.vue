@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted } from 'vue';
 import type { Photo } from '../types';
 
-const props = defineProps<{
+defineProps<{
   photo: Photo;
 }>();
 

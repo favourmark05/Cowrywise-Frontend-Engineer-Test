@@ -58,7 +58,7 @@ onMounted(() => {
       <SearchBar v-if="!showSearchResults" @search="handleSearch" class="search" />
       <div v-if="showSearchResults" class="search-result-container">
         <p class="search-result">Searching for <span>"{{ searchTerm }}"</span></p>
-        <button class="back-btn" @click="goBack">Go Back</button>
+        <p class="back-btn" @click="goBack">X</p>
       </div>
     </div>
 
@@ -139,6 +139,9 @@ onMounted(() => {
     padding: 10px 20px;
     height: 50px;
     width: 125px ;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
   }
 
   main {
