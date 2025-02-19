@@ -158,14 +158,34 @@ onMounted(() => {
     grid-template-columns: auto auto;
   }
   .back-btn {
-    margin-top: 60px;
-    padding: 10px 20px;
-    height: 50px;
-    width: 125px;
-    color: red;
-    font-weight: bold;
-    cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  padding: 12px 20px;
+  background-color: #dc3545;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: #b02a37; /* Darker red */
+    transform: scale(1.05);
   }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+
 
   main {
     background-color: white;
