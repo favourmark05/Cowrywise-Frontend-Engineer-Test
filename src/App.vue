@@ -67,7 +67,7 @@ onMounted(() => {
           Searching for <span>“{{ searchTerm }}”</span>
         </p>
       </div>
-      <div v-if="!loading && photos.length > 0 && showSearchResults" class="search-result-container">
+      <div v-if="!loading && showSearchResults" class="search-result-container">
         <p class="search-result ">
           Search Result for <span>“{{ searchTerm }}”</span>
         </p>
