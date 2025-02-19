@@ -10,7 +10,7 @@ const photos = ref<Photo[]>([]);
 const loading = ref(true);
 const selectedPhoto = ref<Photo | null>(null);
 const error = ref<string | null>(null);
-const searchTerm = ref<string | null>(null);
+const searchTerm = ref<string>("");
 
 const fetchPhotos = async (query: string = "") => {
   loading.value = true;
