@@ -22,7 +22,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
     emit("search", searchQuery.value);
   }
 };
-
 </script>
 
 <template>

@@ -50,6 +50,7 @@ onMounted(() => {
     <div class="backdrop">
       <SearchBar
         v-if="!loading"
+        v-model="searchTerm"
         @search="handleSearch"
         class="search"
       />
