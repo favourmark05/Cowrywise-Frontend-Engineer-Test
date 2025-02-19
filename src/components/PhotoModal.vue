@@ -122,6 +122,10 @@ onUnmounted(() => {
   cursor: pointer;
   transition: color 0.2s ease-in-out;
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    right: 10%;
+  }
 }
 
 /* Animations */

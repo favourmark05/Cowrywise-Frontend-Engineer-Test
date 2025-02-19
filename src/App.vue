@@ -175,8 +175,15 @@ onMounted(() => {
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
+  @media (max-width: 768px) {
+    font-size: 10px;
+    top: 10%;
+    right: 10%;
+    padding: 10px 18px;
+  }
+
   &:hover {
-    background-color: #b02a37; /* Darker red */
+    background-color: #b02a37;
     transform: scale(1.05);
   }
 
@@ -237,8 +244,18 @@ onMounted(() => {
         .photo-item:nth-child(3) {
           height: 350px;
           width: 100%;
+
+          @media (max-width: 768px) {
+            height: 100%;
+          }
         }
 
+        @media (max-width: 768px) {
+          .photo-item:nth-child(2) {
+              margin-top: 8px ;
+              margin-bottom: 60px;
+            }
+        }
         @media (min-width: 768px) {
           .photo-item:nth-child(n + 4):nth-child(3n + 1),
           .photo-item:nth-child(n + 4):nth-child(3n + 3) {
