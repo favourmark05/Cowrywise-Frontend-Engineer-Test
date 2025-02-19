@@ -11,6 +11,7 @@ const loading = ref(true);
 const selectedPhoto = ref<Photo | null>(null);
 const error = ref<string | null>(null);
 const searchTerm = ref<string>("");
+const showSearchResults = ref(false);
 
 const fetchPhotos = async (query: string = "") => {
   loading.value = true;
@@ -27,8 +28,15 @@ const fetchPhotos = async (query: string = "") => {
 };
 
 const handleSearch = (query: string) => {
+  showSearchResults.value = true;
   fetchPhotos(query);
   searchTerm.value = query;
+};
+
+const goBack = () => {
+  searchTerm.value = "";
+  showSearchResults.value = false;
+  fetchPhotos();
 };
 
 
@@ -49,7 +57,7 @@ onMounted(() => {
   <div class="app">
     <div class="backdrop">
       <SearchBar
-        v-if="!loading"
+        v-if="!loading && !showSearchResults"
         v-model="searchTerm"
         @search="handleSearch"
         class="search"
@@ -58,6 +66,12 @@ onMounted(() => {
         <p class="search-result">
           Searching for <span>“{{ searchTerm }}”</span>
         </p>
+      </div>
+      <div v-if="!loading && photos.length > 0 && showSearchResults" class="search-result-container">
+        <p class="search-result ">
+          Search Result for <span>“{{ searchTerm }}”</span>
+        </p>
+        <p class="back-btn" @click="goBack">Clear Search</p>
       </div>
     </div>
 
@@ -128,7 +142,7 @@ onMounted(() => {
     font-size: 50px;
     color: #0a3e73;
     padding: 80px 35px;
-    
+
     @media (max-width: 668px) {
       font-size: 20px;
     }

@@ -36,7 +36,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
         v-model="searchQuery"
         @input="handleInput"
         @keydown.enter="handleKeyDown"
-        placeholder="Search for photos"
+        placeholder="Search for photo"
         class="search-input"
       />
     </div>
