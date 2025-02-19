@@ -27,7 +27,7 @@ onUnmounted(() => {
 
 <template>
   <div class="modal-overlay" @click="emit('close')">
-    <button class="close-button" @click="emit('close')">&times;</button>
+    <p class="close-button" @click="emit('close')">&times;</p>
     <div class="modal-container" @click.stop>
 
       <div class="image-wrapper">
@@ -122,10 +122,6 @@ onUnmounted(() => {
   cursor: pointer;
   transition: color 0.2s ease-in-out;
   z-index: 1000;
-
-  &:hover {
-    color: #000;
-  }
 }
 
 /* Animations */
