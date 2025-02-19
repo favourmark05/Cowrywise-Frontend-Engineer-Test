@@ -3,17 +3,20 @@ import { ref } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import SearchIcon from "./icons/SearchIcon.vue";
 
+const props = defineProps<{ modelValue: string }>();
 const emit = defineEmits<{
   (e: "search", query: string): void;
+  (e: "update:modelValue", value: string): void;
 }>();
 
-const searchQuery = ref("");
+const searchQuery = ref(props.modelValue);
 
 const debouncedSearch = useDebounceFn((query: string) => {
   emit("search", query);
 }, 5000);
 
 const handleInput = () => {
+    emit("update:modelValue", searchQuery.value);
   debouncedSearch(searchQuery.value);
 };
 
