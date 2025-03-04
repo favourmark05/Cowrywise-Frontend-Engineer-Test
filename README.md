@@ -18,11 +18,11 @@
 - **Students & Researchers** – Easily access relevant visuals for academic projects and reports.  
 
 ## **Technology Stack**  
-- **Frontend:** Vue.js (Vue 3 + Composition API), Tailwind CSS, SCSS  
+- **Frontend:** Vue.js (Vue 3 + Composition API), SCSS  
 - **API:** Unsplash API for fetching high-quality images  
 - **State Management:** Pinia  
 - **Build Tools:** Vite  
-- **Deployment:** Vercel / Netlify  
+- **Deployment:** Netlify  
 
 ## **Future Enhancements**  
 🚀 **Download in Multiple Resolutions** – Let users choose image sizes before downloading.  
