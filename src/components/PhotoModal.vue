@@ -1,27 +1,49 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
-import type { Photo } from '../types';
+import { onMounted, onUnmounted, ref } from "vue";
+import type { Photo } from "../types";
+import DownloadIcon from "./icons/DownloadIcon.vue";
+import LoaderIcon from "./icons/LoaderIcon.vue";
 
-defineProps<{
-  photo: Photo;
-}>();
-
+// defineProps<{
+//   photo: Photo;
+// }>();
+const downloading = ref(false);
+const props = defineProps<{ photo: Photo }>();
 const emit = defineEmits<{
-  (e: 'close'): void;
+  (e: "close"): void;
 }>();
+const downloadImage = async () => {
+  downloading.value = true;
+  try {
+    const response = await fetch(props.photo.urls.full);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
 
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${props.photo.user.name.replace(/\s+/g, '_')}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    downloading.value = false;
+  } catch (error) {
+    console.error("Error downloading the image:", error);
+    downloading.value = false;
+  }
+};
 const handleEscape = (e: KeyboardEvent) => {
-  if (e.key === 'Escape') emit('close');
+  if (e.key === "Escape") emit("close");
 };
 
 onMounted(() => {
-  document.addEventListener('keydown', handleEscape);
-  document.body.style.overflow = 'hidden';
+  document.addEventListener("keydown", handleEscape);
+  document.body.style.overflow = "hidden";
 });
 
 onUnmounted(() => {
-  document.removeEventListener('keydown', handleEscape);
-  document.body.style.overflow = 'auto';
+  document.removeEventListener("keydown", handleEscape);
+  document.body.style.overflow = "auto";
 });
 </script>
 
@@ -29,14 +51,17 @@ onUnmounted(() => {
   <div class="modal-overlay" @click="emit('close')">
     <p class="close-button" @click="emit('close')">&times;</p>
     <div class="modal-container" @click.stop>
-
       <div class="image-wrapper">
         <img :src="photo.urls.full" :alt="photo.alt_description" />
       </div>
 
       <div class="modal-info">
-        <h2>{{ photo.user.name }}</h2>
-        <p>{{ photo.user?.location || 'Unknown Location' }}</p>
+        <div>
+          <h2>{{ photo.user.name }}</h2>
+          <p>{{ photo.user?.location || "Unknown Location" }}</p>
+        </div>
+        <DownloadIcon @click.prevent="downloadImage" v-if="downloading == false"/>
+        <LoaderIcon v-else/>
       </div>
     </div>
   </div>
@@ -85,7 +110,7 @@ onUnmounted(() => {
     height: 100%;
     z-index: 1;
     transition: transform 0.3s ease-in-out;
-    object-fit: contain;
+    object-fit: fill;
     object-position: center;
   }
 
@@ -98,6 +123,9 @@ onUnmounted(() => {
   padding: 20px 45px;
   text-align: left;
   color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   h2 {
     font-size: 1.5rem;
